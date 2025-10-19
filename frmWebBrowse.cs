@@ -1,5 +1,7 @@
 ﻿using CefSharp;
 using CefSharp.WinForms;
+using HTMLMCPSandbox.Filtering;
+using Microsoft.Extensions.Logging;
 
 namespace HTMLMCPSandbox
 {
@@ -7,17 +9,28 @@ namespace HTMLMCPSandbox
     {
         private IDOMHooks _domInterface;
 
-        public frmWebBrowse(IDOMHooks domInterface)
+        public frmWebBrowse(IDOMHooks domInterface, ILoggerFactory? loggerFactory = null)
         {
             InitializeComponent();
 
-            Cef.Initialize(new CefSettings() { UserAgent = $"HTMLMCPSandbox ^_^ CEF[{Cef.CefSharpVersion}]" });
+            Cef.Initialize(new CefSettings()
+            {
+                UserAgent = $"HTMLMCPSandbox ^_^ CEF[{Cef.CefSharpVersion}]",
+                CefCommandLineArgs = { ["disable-gcm"] = "1" }
+            });
 
             webBrowser.IsBrowserInitializedChanged += async (s, e) =>
             {
                 string ic = GetInitialContent();
                 await DoSetDOMContentAsync(ic);
             };
+
+            FilteringRequestHandler requestHandler = new FilteringRequestHandler();
+
+            requestHandler.LoggerFactory = loggerFactory;
+
+            webBrowser.RequestHandler = requestHandler;
+
 
             this._domInterface = domInterface;
             _domInterface.OnSetDOMContentAsync += DoSetDOMContentAsync;

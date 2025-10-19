@@ -1,13 +1,14 @@
-﻿using HTMLMCPSandbox;
-using ModelContextProtocol.Server;
+﻿using ModelContextProtocol.Server;
 using System.ComponentModel;
 
+namespace HTMLMCPSandbox;
+
 [McpServerToolType]
-public class MCPDOMTools
+public class MCPTools
 {
     private readonly IMCPCommands _bridge;
 
-    public MCPDOMTools(IMCPCommands bridge)
+    public MCPTools(IMCPCommands bridge)
     {
         _bridge = bridge;
     }
