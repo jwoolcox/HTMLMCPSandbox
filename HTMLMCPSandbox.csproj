@@ -2,11 +2,16 @@
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net9.0-windows</TargetFramework>
+		<RuntimeIdentifier>win-x64</RuntimeIdentifier>
 		<Nullable>enable</Nullable>
 		<UseWindowsForms>true</UseWindowsForms>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<PlatformTarget>x64</PlatformTarget>
+		<PlatformTarget>AnyCPU</PlatformTarget>		
 		<ApplicationIcon>appIcon.ico</ApplicationIcon>
+		<CopyCefSharpAssemblies>true</CopyCefSharpAssemblies>
+  		<CopyCefSharpBrowserSubprocess>true</CopyCefSharpBrowserSubprocess>
+  		<CopyCefSharpNativeFiles>true</CopyCefSharpNativeFiles>
+		<CefSharpBuildAction>Content</CefSharpBuildAction>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -28,7 +33,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CefSharp.WinForms.NETCore" Version="139.0.280" />
+		<PackageReference Include="CefSharp.WinForms.NETCore" Version="140.1.140 " />
 		<PackageReference Include="Microsoft.AspNetCore" Version="2.3.0" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0-rc.1.25451.107" />
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
@@ -37,4 +42,7 @@
 		<PackageReference Include="ModelContextProtocol.AspNetCore" Version="0.3.0-preview.4" />
 		<PackageReference Include="System.Formats.Asn1" Version="9.0.9" />
 	</ItemGroup>
+
+	<Import Project="$(MSBuildProgramFiles32)\CefSharp\\CefSharp.props" Condition="Exists('$(MSBuildProgramFiles32)\CefSharp\\CefSharp.props')" />
+	<Import Project="$(MSBuildProgramFiles32)\CefSharp\\CefSharp.targets" Condition="Exists('$(MSBuildProgramFiles32)\CefSharp\\CefSharp.targets')" />		
 </Project>

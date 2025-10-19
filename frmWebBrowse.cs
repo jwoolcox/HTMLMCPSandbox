@@ -16,7 +16,9 @@ namespace HTMLMCPSandbox
             Cef.Initialize(new CefSettings()
             {
                 UserAgent = $"HTMLMCPSandbox ^_^ CEF[{Cef.CefSharpVersion}]",
-                CefCommandLineArgs = { ["disable-gcm"] = "1" }
+                CefCommandLineArgs = {
+                    ["disable-gcm"] = "1",
+                        }
             });
 
             webBrowser.IsBrowserInitializedChanged += async (s, e) =>
@@ -31,13 +33,19 @@ namespace HTMLMCPSandbox
 
             webBrowser.RequestHandler = requestHandler;
 
-
             this._domInterface = domInterface;
             _domInterface.OnSetDOMContentAsync += DoSetDOMContentAsync;
             _domInterface.OnGetDOMContentAsync += DoGetDOMContentAsync;
             _domInterface.OnRunJavascriptAsync += DoRunJavascriptAsync;
             _domInterface.OnGetInnerHTMLBySelectorAsync += DoGetInnerHTMLBySelectorAsync;
             _domInterface.OnSetInnerHTMLBySelectorAsync += DoSetInnerHTMLBySelectorAsync;
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            Cef.Shutdown();
+
+            base.OnFormClosing(e);
         }
 
         private async Task<string> DoRunJavascriptAsync(string request)
