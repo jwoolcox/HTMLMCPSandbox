@@ -5,18 +5,18 @@
       "name": ".NET Debug HTMLMCPSandbox",
       "type": "coreclr",
       "request": "launch",
-      "program": "${workspaceFolder}/bin/Debug/net9.0-windows/HTMLMCPSandbox.exe",
+      "program": "${workspaceFolder}/bin/Debug/net9.0-windows/win-x64/HTMLMCPSandbox.exe",
       "args": [],
-      "cwd": "${workspaceFolder}/bin/Debug/net9.0-windows",
+      "cwd": "${workspaceFolder}/bin/Debug/net9.0-windows/win-x64",
       "stopAtEntry": true
     },
     {
       "name": ".NET Release HTMLMCPSandbox",
       "type": "coreclr",
       "request": "launch",
-      "program": "${workspaceFolder}/bin/Release/net9.0-windows/HTMLMCPSandbox.exe",
+      "program": "${workspaceFolder}/bin/Release/net9.0-windows/win-x64/HTMLMCPSandbox.exe",
       "args": [],
-      "cwd": "${workspaceFolder}/bin/Release/net9.0-windows",
+      "cwd": "${workspaceFolder}/bin/Release/net9.0-windows/win-x64",
       "stopAtEntry": false
     }
   ]
