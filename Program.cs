@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace HTMLMCPSandbox
 {
@@ -12,16 +13,15 @@ namespace HTMLMCPSandbox
 
             var wdii = new MCPDOMBridgeImpl();
 
-            var form = new frmWebBrowse(wdii);
+
+            var builder = WebApplication.CreateBuilder(args);
 
             Task.Run(() =>
             {
-                var builder = WebApplication.CreateBuilder(args);
-
                 builder.Services.AddSingleton<IMCPCommands>(wdii);
-                builder.Services.AddSingleton<MCPDOMTools>(); //
+                builder.Services.AddSingleton<MCPTools>(); //
                 builder.Services.AddMcpServer()
-                        .WithTools<MCPDOMTools>()
+                        .WithTools<MCPTools>()
                         .WithHttpTransport();
 
 
@@ -30,7 +30,16 @@ namespace HTMLMCPSandbox
                 app.MapMcp();
 
                 app.Run("http://localhost:8000");
+
             });
+
+            ILoggerFactory loggerFactory = LoggerFactory.Create(loggingBuilder =>
+            {
+                loggingBuilder.AddConsole();
+                loggingBuilder.SetMinimumLevel(LogLevel.Debug);
+            });
+
+            var form = new frmWebBrowse(wdii, loggerFactory);
 
             Application.Run(form);
         }

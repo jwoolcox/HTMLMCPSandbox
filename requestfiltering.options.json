@@ -1,0 +1,20 @@
+{
+  "AllowedDomains": [
+    "",
+    "cdnjs.cloudflare.com",
+    "fonts.googleapis.com",
+    "fonts.gstatic.com"
+  ],
+  "BlockedDomains": [],
+  "AllowedSchemes": [],
+  "BlockedSchemes": [
+    "file",
+    "ftp",
+    "chrome",
+    "chrome-extension",
+    "about",
+    "blob",
+    "http"
+  ],
+  "LocalRootFolder": "_internal"
+}
