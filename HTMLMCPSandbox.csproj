@@ -36,12 +36,13 @@
 	<ItemGroup>
 		<PackageReference Include="CefSharp.WinForms.NETCore" Version="140.1.140 " />
 		<PackageReference Include="Microsoft.AspNetCore" Version="2.3.0" />
+		<PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Core" Version="2.3.6" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0-rc.1.25451.107" />
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.9" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.10" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.10" />
 		<PackageReference Include="ModelContextProtocol" Version="0.3.0-preview.4" />
 		<PackageReference Include="ModelContextProtocol.AspNetCore" Version="0.3.0-preview.4" />
-		<PackageReference Include="System.Formats.Asn1" Version="9.0.9" />
+		<PackageReference Include="System.Formats.Asn1" Version="9.0.10" />
 	</ItemGroup>
 
 	<ItemGroup>
