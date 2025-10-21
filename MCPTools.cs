@@ -14,31 +14,31 @@ public class MCPTools
     }
 
     [McpServerTool, Description("Runs Javascript in the tool web browser")]
-    public async Task<string> RunJavascriptAsync(string javascript)
+    public async Task<string> RunJavascriptAsync([Description("Javascript to execute")]string javascript)
     {
         return await _bridge.RunJavascriptAsync(javascript);
     }
 
-    [McpServerTool, Description("Sets the immediate tool web browser DOM contents")]
-    public async Task SetDOMContent(string html)
+    [McpServerTool, Description("Sets the contents of the browser DOM")]
+    public async Task SetDOMContent([Description("Html content to write to the DOM")]string html)
     {
         await _bridge.SetDOMContentAsync(html);
     }
 
-    [McpServerTool, Description("Retrieves the current tool web browser DOM contents")]
+    [McpServerTool, Description("Gets the contents of the browser DOM")]
     public async Task<string> GetDOMContent()
     {
         return await _bridge.GetDOMContentAsync();
     }
 
-    [McpServerTool, Description("Retrieves the innerHTML of the DOM element specified by query selector")]
-    public async Task<string> GetInnerHTMLBySelectorAsync(string selector)
+    [McpServerTool, Description("Gets the innerHTML content of the element specified by selector")]
+    public async Task<string> GetInnerHTMLBySelectorAsync([Description("Element selector")]string selector)
     {
         return await _bridge.GetInnerHTMLBySelectorAsync(selector);
     }
 
-    [McpServerTool, Description("Sets the innerHTML of the DOM element specified by query selector")]
-    public async Task SetInnerHTMLBySelectorAsync(string selector, string innerHTML)
+    [McpServerTool, Description("Sets the innerHTML content of the element specified by selector")]
+    public async Task SetInnerHTMLBySelectorAsync([Description("Element selector")]string selector, [Description("innerHTML content")]string innerHTML)
     {
         await _bridge.SetInnerHTMLBySelectorAsync(selector, innerHTML);
     }
