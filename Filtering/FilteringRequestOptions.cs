@@ -6,9 +6,7 @@ namespace HTMLMCPSandbox.Filtering;
 public class FilteringRequestOptions
 {
     public List<string> AllowedDomains { get; set; } = new List<string>();
-    public List<string> BlockedDomains { get; set; } = new List<string>();
     public List<string> AllowedSchemes { get; set; } = new List<string>();
-    public List<string> BlockedSchemes { get; set; } = new List<string>();
     public string LocalRootFolder { get; set; } = "_internal";
 }
 
@@ -55,21 +53,20 @@ public static class FilteringRequestOptionsLoader
     {
         AllowedDomains =
         {
-                "",
                 "cdnjs.cloudflare.com",
+                "cdn.jsdelivr.net",
                 "fonts.googleapis.com",
-                "fonts.gstatic.com"
+                "fonts.gstatic.com",
+                /*
+                "localhost",
+                "127.0.0.1",
+                 */
             },
-        BlockedSchemes =
-            {
-                "file",
-                "ftp",
-                "chrome",
-                "chrome-extension",
-                "about",
-                "blob",
-                "http"
-            },
+        AllowedSchemes =
+        {
+            "https",
+            "data"
+        },
         LocalRootFolder = "_internal"
     };
 }

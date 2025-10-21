@@ -13,7 +13,6 @@ namespace HTMLMCPSandbox
 
             var wdii = new MCPDOMBridgeImpl();
 
-
             var builder = WebApplication.CreateBuilder(args);
 
             Task.Run(() =>

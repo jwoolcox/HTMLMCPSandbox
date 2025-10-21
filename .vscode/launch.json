@@ -8,7 +8,7 @@
       "program": "${workspaceFolder}/bin/Debug/net9.0-windows/win-x64/HTMLMCPSandbox.exe",
       "args": [],
       "cwd": "${workspaceFolder}/bin/Debug/net9.0-windows/win-x64",
-      "stopAtEntry": true
+      "stopAtEntry": false
     },
     {
       "name": ".NET Release HTMLMCPSandbox",
