@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTMLMCPSandbox</title>
+    <link rel="stylesheet" href="internal:///baseline.css" />
+    <script src="internal:///cash.min.js"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #1e1e2f, #2c2c54);
+            color: #f5f5f5;
+            font-family: system-ui, sans-serif;
+            overflow: hidden;
+        }
+
+        .init-container {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255,255,255,0.1);
+            border-top-color: #fff;
+            border-radius: 50%;
+            margin: 20px auto;
+            animation: spin 1s linear infinite;
+            transition: opacity 0.5s ease;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading {
+            opacity: 0.7;
+            transition: opacity 0.5s ease;
+        }
+
+        .ready {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+            .ready.show {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #4caf50;
+            color: white;
+            transition: background 0.3s ease;
+        }
+
+            button:hover {
+                background: #43a047;
+            }
+    </style>
+</head>
+<body>
+    <div class="init-container">
+        <div class="spinner" id="spinner"></div>
+        <div class="loading" id="loadingText">Initializing HTMLMCPSandbox...</div>
+
+        <div class="ready" id="readyContent">
+            <h1>HTMLMCPSandbox READY!</h1>
+            <p>Welcome to your WebDOM sandbox. You can dynamically inject HTML, CSS, and JavaScript here using your LLM tools.</p>
+            <button onclick="alert('HTMLMCPSandbox is ready!')">Click Me!</button>
+        </div>
+    </div>
+
+    <script>
+        // Cash-compatible "fadeOut" helper using CSS opacity
+        function fadeOut(el, duration = 500, callback) {
+            el.style.transition = `opacity ${duration}ms ease`;
+            el.style.opacity = 0;
+            setTimeout(() => {
+                if (callback) callback();
+            }, duration);
+        }
+
+        $(function () {
+            console.log("HTMLMCPSandbox initializing...");
+
+            // Delay to simulate loading
+            setTimeout(() => {
+                // Fade out spinner and loading text
+                fadeOut($("#spinner")[0]);
+                fadeOut($("#loadingText")[0], 500, () => {
+                    // Show ready content
+                    $("#readyContent").addClass("show");
+                });
+                console.log("HTMLMCPSandbox READY!");
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

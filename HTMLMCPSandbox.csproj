@@ -12,6 +12,7 @@
   		<CopyCefSharpBrowserSubprocess>true</CopyCefSharpBrowserSubprocess>
   		<CopyCefSharpNativeFiles>true</CopyCefSharpNativeFiles>
 		<CefSharpBuildAction>Content</CefSharpBuildAction>
+		<SelfContained Condition="'$(SelfContained)' == ''">false</SelfContained>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -41,6 +42,24 @@
 		<PackageReference Include="ModelContextProtocol" Version="0.3.0-preview.4" />
 		<PackageReference Include="ModelContextProtocol.AspNetCore" Version="0.3.0-preview.4" />
 		<PackageReference Include="System.Formats.Asn1" Version="9.0.9" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="frmWebBrowse.resx">
+	    <Generator></Generator>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Update="_internal\baseline.css">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="_internal\cash.min.js">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	  <None Update="_internal\appIndex.html">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 
 	<Import Project="$(MSBuildProgramFiles32)\CefSharp\\CefSharp.props" Condition="Exists('$(MSBuildProgramFiles32)\CefSharp\\CefSharp.props')" />
