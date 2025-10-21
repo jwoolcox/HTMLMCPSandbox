@@ -2,20 +2,16 @@
 
 namespace HTMLMCPSandbox
 {
-    public class InternalSchemeHandlerFactory : ISchemeHandlerFactory
+    public class InternalSchemeHandlerFactory (string rootFolderPath) : ISchemeHandlerFactory
     {
         public IResourceHandler Create(IBrowser browser, IFrame frame, string schemeName, IRequest request)
         {
-            return new InternalSchemeHandler();
+            return new InternalSchemeHandler(rootFolderPath);
         }
     }
 
-    public class InternalSchemeHandler : ResourceHandler
+    public class InternalSchemeHandler (string rootFolderPath) : ResourceHandler
     {
-        private static readonly string Root = Path.GetFullPath(
-            Path.Combine(AppContext.BaseDirectory, "_internal")
-        );
-
         public override CefReturnValue ProcessRequestAsync(IRequest request, ICallback callback)
         {
             Task.Run(() =>
@@ -26,9 +22,10 @@ namespace HTMLMCPSandbox
                     {
                         var uri = new Uri(request.Url);
                         var relativePath = uri.AbsolutePath.TrimStart('/');
-                        var requestedPath = Path.GetFullPath(Path.Combine(Root, relativePath));
+                        string rootFolder = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, rootFolderPath));
+                        var requestedPath = Path.GetFullPath(Path.Combine(rootFolder, relativePath));
 
-                        if (!requestedPath.StartsWith(Root, StringComparison.OrdinalIgnoreCase))
+                        if (!requestedPath.StartsWith(rootFolder, StringComparison.OrdinalIgnoreCase))
                         {
                             StatusCode = 404;
                             callback.Continue();

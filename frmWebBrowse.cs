@@ -34,12 +34,10 @@ namespace HTMLMCPSandbox
             browserSettings.UserAgent = $"HTMLMCPSandbox ^_^ CEF[{Cef.CefSharpVersion}]";
             browserSettings.CefCommandLineArgs.Add("no-proxy-server");
 
-            string resourceRoot = Path.Combine(AppContext.BaseDirectory, "_internal");
-
             browserSettings.RegisterScheme(new CefCustomScheme
             {
                 SchemeName = "internal",
-                SchemeHandlerFactory = new InternalSchemeHandlerFactory(),
+                SchemeHandlerFactory = new InternalSchemeHandlerFactory("_internal"),
                 IsStandard = false,
                 IsLocal = false,
                 IsSecure = true,

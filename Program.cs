@@ -19,9 +19,15 @@ namespace HTMLMCPSandbox
             {
                 builder.Services.AddSingleton<IMCPCommands>(wdii);
                 builder.Services.AddSingleton<MCPTools>(); //
-                builder.Services.AddMcpServer()
-                        .WithTools<MCPTools>()
-                        .WithHttpTransport();
+                builder.Services.AddMcpServer((mcpopts) => 
+                                {
+
+                                })
+                                .WithTools<MCPTools>()
+                                .WithHttpTransport((opt) =>
+                                {
+                            
+                                });
 
 
                 var app = builder.Build();
