@@ -1,10 +1,4 @@
-﻿/*
- * agent.css — Minimal, modern baseline CSS for browser UIs
- * Drop‑in baseline for projects. Keep it small, accessible, and opinionated-but-flexible.
- * Usage: include <link rel="stylesheet" href="agent.css"> as early as possible.
- */
-
-/* Box model & sensible defaults */
+﻿/* --- Core Reset --- */
 *, *::before, *::after {
     box-sizing: border-box;
 }
@@ -15,13 +9,19 @@ html {
     -webkit-font-smoothing: antialiased;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* --- Color System --- */
 :root {
-    /* palette */
-    --bg: 255 255 255; /* store as RGB for easier alpha */
-    --fg: 26 26 26;
-    --muted: 98 100 102;
+    --bg: 28 31 43; /* dark gray-blue */
+    --bg2: 46 53 83; /* complementary darker blue */
+    --font-color: #e0e0e0;
+    --fg: 224 224 224;
+    --muted: 140 140 150;
     --brand: 0 120 212;
-    /* spacing/scale */
     --space-xs: 4px;
     --space-sm: 8px;
     --space-md: 16px;
@@ -30,210 +30,146 @@ html {
     --radius-sm: 6px;
     --radius-md: 12px;
     --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
-    --shadow-md: 0 6px 18px rgba(0,0,0,0.08);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    color-scheme: light dark;
+    --shadow-md: 0 6px 18px rgba(0,0,0,0.12);
     --max-width: 1100px;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
-/* Light/dark convenience */
-@media (prefers-color-scheme: dark) {
-    :root {
-        --bg: 18 18 20;
-        --fg: 241 241 245;
-        --muted: 145 145 150;
-    }
-}
-
-/* Page */
-html, body {
-    height: 100%;
-}
-
+/* --- Page & Typography --- */
 body {
-    margin: 0;
-    background-color: rgb(var(--bg));
-    color: rgb(var(--fg));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, rgb(var(--bg)), rgb(var(--bg2)));
+    color: var(--font-color);
     line-height: 1.45;
     font-size: 16px;
-    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+    transition: background 0.6s ease;
 }
 
-/* Layout helpers */
-.container {
-    width: 100%;
-    max-width: var(--max-width);
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: var(--space-md);
-    padding-right: var(--space-md);
-}
-
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-md);
-}
-
-.col {
-    flex: 1 1 0;
-}
-
-.stack {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-sm);
-}
-
-.grid {
-    display: grid;
-    gap: var(--space-md);
-}
-
-/* Typography */
 h1, h2, h3, h4, h5, h6 {
-    margin: 0 0 var(--space-sm) 0;
+    margin: 0 0 var(--space-sm);
     font-weight: 600;
     line-height: 1.15;
+    letter-spacing: 0.03em;
 }
 
 h1 {
     font-size: 2rem;
-}
-
-h2 {
-    font-size: 1.5rem;
+    color: var(--font-color);
 }
 
 p {
-    margin: 0 0 var(--space-md) 0;
+    margin: 0 0 var(--space-md);
 }
 
-small {
-    font-size: 0.9em;
-    color: rgb(var(--muted));
-}
-
-/* Links */
-a {
-    color: rgb(var(--brand));
-    text-decoration: none;
-}
-
-    a:hover, a:focus {
-        text-decoration: underline;
-    }
-
-/* Buttons */
-.button, button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 0.5rem 0.9rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid rgba(0,0,0,0.06);
-    background: none;
-    cursor: pointer;
-    font: inherit;
-}
-
-.button-primary {
-    background-color: rgb(var(--brand));
-    color: white;
-    border: 1px solid rgba(0,0,0,0.08);
-}
-
-.button:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-/* Forms */
-input, textarea, select {
-    font: inherit;
-    padding: 0.5rem 0.6rem;
-    border-radius: var(--radius-sm);
-    border: 1px solid rgba(0,0,0,0.12);
-    background: transparent;
-}
-
-textarea {
-    min-height: 120px;
-    resize: vertical;
-}
-
-label {
-    display: inline-block;
-    margin-bottom: 6px;
-    font-weight: 500;
-}
-
-fieldset {
-    border: 0;
-    margin: 0;
-    padding: 0;
-}
-
-/* Images */
-img, picture, video {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Cards */
-.card {
-    background-color: rgba(var(--bg), 0.98);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-sm);
-    padding: var(--space-md);
-}
-
-/* Accessibility helpers */
-:focus {
-    outline: none;
-}
-
-:focus-visible {
-    outline: 3px solid rgba(var(--brand), 0.18);
-    outline-offset: 3px;
-}
-
-.sr-only {
-    position: absolute !important;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-/* Utility classes */
-.text-center {
+/* --- Layout Helpers --- */
+.container {
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-md);
     text-align: center;
 }
 
-.mt-sm {
-    margin-top: var(--space-sm);
+/* --- Spinner / Transition Styles --- */
+.spinner {
+    width: 64px;
+    height: 64px;
+    border: 4px solid rgba(255, 255, 255, 0.1);
+    border-top-color: rgb(var(--brand));
+    border-radius: 50%;
+    margin: 24px auto;
+    animation: spin 1s linear infinite;
+    transition: opacity 0.5s ease;
 }
 
-.mt-md {
-    margin-top: var(--space-md);
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
 }
 
-.mb-sm {
-    margin-bottom: var(--space-sm);
+.loading {
+    opacity: 0.7;
+    transition: opacity 0.5s ease;
 }
 
-.p-sm {
-    padding: var(--space-sm);
+.ready {
+    opacity: 0;
+    transform: scale(0.96);
+    transition: opacity 0.9s ease, transform 0.9s ease;
+    display: block;
 }
 
-/* Reduced motion */
+    .ready.show {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+/* --- Cards --- */
+.card {
+    background: rgba(var(--bg2), 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-md);
+    color: var(--font-color);
+    text-align: left;
+    padding: var(--space-md);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+}
+
+    .card:hover, .card:focus-within {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+        background: rgba(var(--bg2), 0.25);
+    }
+
+/* --- Buttons --- */
+button, .button, .button-primary {
+    background: rgb(var(--brand));
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+    font: inherit;
+    transition: background 0.3s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+    button:hover, button:focus, .button-primary:hover, .button-primary:focus {
+        background: rgb(0, 140, 255);
+        transform: translateY(-1px);
+        box-shadow: 0 0 0 3px rgba(0, 140, 255, 0.3);
+        outline: none;
+    }
+
+/* --- Small Text --- */
+small {
+    color: rgb(var(--muted));
+    opacity: 0.8;
+    font-size: 0.9rem;
+}
+
+/* --- Accessibility: focus visible --- */
+:focus-visible {
+    outline: 3px solid #ffcc00; /* high contrast focus indicator */
+    outline-offset: 2px;
+}
+
+/* --- Responsive --- */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    .card {
+        padding: var(--space-sm);
+    }
+}
+
+/* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
     * {
         animation-duration: 0.001ms !important;
@@ -242,34 +178,3 @@ img, picture, video {
         scroll-behavior: auto !important;
     }
 }
-
-/* Small responsive tweaks */
-@media (max-width: 600px) {
-    :root {
-        --space-md: 12px;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
-}
-
-/* Simple reset for lists */
-ul, ol {
-    padding-left: 1.2rem;
-    margin: 0 0 var(--space-md) 0;
-}
-
-/* Make tables readable */
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    text-align: left;
-    padding: 0.5rem;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-}
-
-/* End of agent.css */
