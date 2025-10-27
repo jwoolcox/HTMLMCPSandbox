@@ -34,7 +34,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="CefSharp.WinForms.NETCore" Version="140.1.140 " />
+		<PackageReference Include="CefSharp.WinForms.NETCore" Version="141.0.110" />
 		<PackageReference Include="Microsoft.AspNetCore" Version="2.3.0" />
 		<PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Core" Version="2.3.6" />
 		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.0-rc.1.25451.107" />
